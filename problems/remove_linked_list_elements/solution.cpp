@@ -13,8 +13,7 @@ public:
     ListNode* removeElements(ListNode* head, int val) {
         while (head && head->val == val)
             head = head->next;
-        ListNode *n = head;
-        while (n && n->next) {
+        for (ListNode *n = head; n && n->next;) {
             if (n->next->val == val)
                 n->next = n->next->next;
             else
