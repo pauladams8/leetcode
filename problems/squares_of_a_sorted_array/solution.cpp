@@ -1,18 +1,19 @@
 class Solution {
 public:
     vector<int> sortedSquares(vector<int>& nums) {
-        std::vector<int> res(nums.size());
-        int i = 0, j = nums.size() - 1;
-        for (int k = res.size() - 1; k >= 0; k--) {
-            if (nums[i] * nums[i] > nums[j] * nums[j]) {
-                res[k] = nums[i] * nums[i];
+        int n = nums.size();
+        vector<int> result(n);
+        int i = 0, j = n - 1;
+        for (int k = n - 1; k >= 0; k--) {
+            int left = nums[i] * nums[i], right = nums[j] * nums[j];
+            if (left > right) {
+                result[k] = left;
                 i++;
-            }
-            else {
-                res[k] = nums[j] * nums[j];
+            } else {
+                result[k] = right;
                 j--;
             }
         }
-        return res;
+        return result;
     }
 };
