@@ -10,14 +10,20 @@
  * };
  */
 class Solution {
-    vector<int> result;
 public:
     vector<int> inorderTraversal(TreeNode* root) {
-        if (!root)
-            return result;
-        inorderTraversal(root->left);
-        result.push_back(root->val);
-        inorderTraversal(root->right);
+        vector<int> result;
+        stack<TreeNode*> stack;
+        while (root || !stack.empty()) {
+            while (root) {
+                stack.push(root);
+                root = root->left;
+            }
+            root = stack.top();
+            stack.pop();
+            result.push_back(root->val);
+            root = root->right;
+        }
         return result;
     }
 };
