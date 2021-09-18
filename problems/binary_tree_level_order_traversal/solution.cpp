@@ -18,17 +18,19 @@ public:
             q.push(root);
         while (!q.empty()) {
             int n = q.size();
-            vector<int> vals;
-            for (int i = 0; i < n; ++i) {
-                TreeNode *n = q.front();
+            vector<int> level;
+            level.reserve(n);
+            for (int i = 0; i < n; i++) {
+                root = q.front();
                 q.pop();
-                vals.push_back(n->val);
-                if (n->left)
-                    q.push(n->left);
-                if (n->right)
-                    q.push(n->right);
+                level.push_back(root->val);
+                if (root->left)
+                    q.push(root->left);
+                if (root->right)
+                    q.push(root->right);
             }
-            result.push_back(move(vals));
+            result.push_back(level);
+            level.clear();
         }
         return result;
     }
