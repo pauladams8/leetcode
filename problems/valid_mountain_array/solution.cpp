@@ -1,25 +1,9 @@
 class Solution {
 public:
     bool validMountainArray(vector<int>& arr) {
-        if (arr.size() < 3)
-            return false;
-        bool increasing = true;
-        for (int i = 1; i < arr.size(); ++i) {
-            if (increasing) {
-                if (arr[i] <= arr[i - 1]) {
-                    if (i == 1)
-                        return false;
-                    if (arr[i] == arr[i - 1])
-                        return false;
-                    increasing = false;
-                }
-                if (increasing && i == arr.size() - 1)
-                    return false;
-            } else {
-                if (arr[i] >= arr[i - 1])
-                    return false;
-            }
-        }
-        return true;
+        int n = arr.size(), i = 0, j = n - 1;
+        while (i + 1 < n && arr[i + 1] > arr[i]) i++;
+        while (j - 1 >= 0 && arr[j - 1] > arr[j]) j--;
+        return i > 0 && i == j && j < n - 1;
     }
 };
