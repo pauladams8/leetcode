@@ -10,21 +10,22 @@
  * };
  */
 class Solution {
-    unordered_map<int, int> inorderMap;
-    TreeNode* buildNode(int left, int right, vector<int>& postorder) {
+    int postorderIndex;
+    TreeNode* buildNode(unordered_map<int, int>& inorderMap, vector<int>& postorder, int left, int right) {
         if (left > right)
             return nullptr;
-        TreeNode* root = new TreeNode(postorder.back());
-        postorder.pop_back();
-        int i = inorderMap[root->val];
-        root->right = buildNode(i + 1, right, postorder);
-        root->left = buildNode(left, i - 1, postorder);
+        TreeNode* root = new TreeNode(postorder[postorderIndex--]);
+        int inorderIndex = inorderMap[root->val];
+        root->right = buildNode(inorderMap, postorder, inorderIndex + 1, right);
+        root->left = buildNode(inorderMap, postorder, left, inorderIndex - 1);
         return root;
     }
 public:
     TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
+        unordered_map<int, int> inorderMap;
         for (int i = 0; i < inorder.size(); i++)
             inorderMap[inorder[i]] = i;
-        return buildNode(0, inorder.size() - 1, postorder);
+        postorderIndex = postorder.size() - 1;
+        return buildNode(inorderMap, postorder, 0, inorder.size() - 1);
     }
 };
