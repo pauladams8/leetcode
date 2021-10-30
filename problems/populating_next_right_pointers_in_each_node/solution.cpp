@@ -17,18 +17,15 @@ public:
 */
 
 class Solution {
-    void connect(Node* left, Node* right) {
-        if (!left) return;
-        left->next = right;
-        connect(left->left, left->right);
-        if (!right) return;
-        connect(left->right, right->left);
-        connect(right->left, right->right);
-    }
 public:
     Node* connect(Node* root) {
-        if (root)
-            connect(root->left, root->right);
+        if (!root) return nullptr;
+        if (root->left)
+            root->left->next = root->right;
+        if (root->right && root->next)
+            root->right->next = root->next->left;
+        connect(root->left);
+        connect(root->right);
         return root;
     }
 };
