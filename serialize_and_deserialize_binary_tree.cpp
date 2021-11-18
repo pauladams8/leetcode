@@ -10,7 +10,6 @@ public:
     std::string serialize(TreeNode* root) {
         std::stringstream ss;
         std::queue<TreeNode*> q;
-        ss << "[";
         if (root) {
             ss << root->val;
             q.push(root->left);
@@ -26,12 +25,11 @@ public:
                 q.push(root->right);
             } else ss << "null";
         }
-        ss << "]";
         std::string str = ss.str();
         std::string null = ",null";
-        while (str.size() - 2 >= null.size() && str.substr(str.size() - 1 - null.size(), null.size()) == null)
-            str.erase(str.size() - 1 - null.size(), null.size());
-        return str;
+        while (str.size() >= null.size() && str.substr(str.size() - null.size()) == null)
+            str.erase(str.size() - null.size());
+        return "[" + str + "]";
     }
 
     TreeNode* deserialize(std::string data) {
