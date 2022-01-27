@@ -1,16 +1,15 @@
 class Solution {
-    std::vector<std::vector<int>> triangle;
 public:
-    Solution() : triangle(34) {
-        for (int row = 0; row <= 33; row++) {
-            triangle[row] = std::vector<int>(row + 1);
-            for (int col = 0; col <= row; col++) {
-                if (col == 0 || col == row) triangle[row][col] = 1;
-                else triangle[row][col] = triangle[row - 1][col - 1] + triangle[row - 1][col];
-            }
-        }
-    }
     std::vector<int> getRow(int rowIndex) {
+        static std::vector<std::vector<int>> triangle;
+        while (rowIndex >= triangle.size()) {
+            std::vector<int> row(triangle.size() + 1);
+            for (int col = 0; col <= triangle.size(); col++) {
+                if (col == 0 || col == triangle.size()) row[col] = 1;
+                else row[col] = triangle[triangle.size() - 1][col - 1] + triangle[triangle.size() - 1][col];
+            }
+            triangle.push_back(row);
+        }
         return triangle[rowIndex];
     }
 };
