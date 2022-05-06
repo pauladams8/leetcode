@@ -1,18 +1,14 @@
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
-        int n = s.size(), max = 0;
-        unordered_map<char, int> map;
-        for (int i = 0, j = 0; i < n; i++) {
-            try {
-                int ex = map.at(s[i]) + 1;
-                if (ex > j)
-                    j = ex;
-            } catch (out_of_range& e) {}
-            map[s[i]] = i;
-            int length = (i - j) + 1;
-            if (length > max)
-                max = length;
+        unordered_map<char, int> seen;
+        int start = 0, max = 0;
+        for (int end = 0; end < s.size(); end++) {
+            auto it = seen.find(s[end]);
+            if (it != seen.end() && it->second >= start)
+                start = it->second + 1;
+            seen[s[end]] = end;
+            max = std::max(max, end - start + 1);
         }
         return max;
     }
