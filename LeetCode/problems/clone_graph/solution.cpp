@@ -21,18 +21,18 @@ public:
 
 class Solution {
 public:
-    Node* cloneGraph(Node* node) {
-        std::unordered_map<Node*, Node*> map;
-        return cloneNode(node, map);
+    Node* cloneGraph(Node *node) {
+        unordered_map<Node*, Node*> map;
+        return cloneGraph(node, map);
     }
 private:
-    Node* cloneNode(Node* node, std::unordered_map<Node*, Node*>& map) {
+    Node* cloneGraph(Node *node, unordered_map<Node*, Node*>& map) {
         if (!node) return nullptr;
-        Node*& newNode = map[node];
-        if (newNode) return newNode;
-        newNode = new Node(*node);
-        for (int i = 0; i < newNode->neighbors.size(); i++)
-            newNode->neighbors[i] = cloneNode(newNode->neighbors[i], map);
-        return newNode;
+        auto& clone = map[node];
+        if (clone) return clone;
+        clone = new Node(*node);
+        for (auto& neighbor : clone->neighbors)
+            neighbor = cloneGraph(neighbor, map);
+        return clone;
     }
 };
