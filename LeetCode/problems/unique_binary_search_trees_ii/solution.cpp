@@ -15,13 +15,17 @@ public:
         return generateTrees(1, n);
     }
 private:
-    vector<TreeNode*> generateTrees(int l, int r) {
-        if (l > r) return { nullptr };
-        vector<TreeNode*> trees;
-        for (int i = l; i <= r; i++)
-            for (TreeNode* left : generateTrees(l, i - 1))
-                for (TreeNode* right : generateTrees(i + 1, r))
-                    trees.push_back(new TreeNode(i, left, right));
-        return trees;
+    vector<TreeNode*> generateTrees(int lb, int ub) {
+        static vector<vector<vector<TreeNode*>>> dp(9, vector<vector<TreeNode*>>(9));
+        if (lb > ub)
+            return { nullptr };
+        if (!dp[lb][ub].empty())
+            return dp[lb][ub];
+        vector<TreeNode*> ans;
+        for (int i = lb; i <= ub; i++)
+            for (auto left : generateTrees(lb, i - 1))
+                for (auto right : generateTrees(i + 1, ub))
+                    ans.push_back(new TreeNode(i, left, right));
+        return dp[lb][ub] = ans;
     }
 };
