@@ -6,6 +6,6 @@
 ![Hard](https://badges.peiyuan.ch/leetcode/daddypenguin/solved?difficulty=hard)
 ![example workflow](https://github.com/pauladams8/leetcode/actions/workflows/sync_leetcode.yml/badge.svg)
 
-You can find me on LeetCode [@daddypenguin](https://leetcode.com/daddypenguin/). I tend to solve problems in C++, but occasionally in Python or Java. My solutions will sync to the `problems` folder at 8am each morning (UTC).
+You can find me on LeetCode [@daddypenguin](https://leetcode.com/daddypenguin/). I tend to solve problems in C++, but occasionally in Python or Java. ~~My solutions will sync to the `problems` folder at 8am each morning (UTC).~~ **Update March 2024** Unfortunately LeetCode has decided to ban bots from pulling data from the platform so the sync has stopped working.
 
 ![LeetCode Badges](https://leetcode-badge-showcase.vercel.app/api?username=daddypenguin)
