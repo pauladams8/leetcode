@@ -1,3 +1,5 @@
 .replit
 **/output.txt
 replit.nix
+.vscode/settings.json
+a.out
