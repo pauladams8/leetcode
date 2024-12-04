@@ -23,17 +23,6 @@ inline bool isSafe(It begin, It end) {
             isValidDistance(begin, end);
 }
 
-inline bool isSafeRemovingOne(vector<int>& nums) {
-    int numIncreasing = 0, numDecreasing = 0, numInvalidDistance;
-    for (int i = 0; i + 1 < n; i++) {
-        numIncreasing += nums[i + 1] > nums[i];
-        numDecreasing += nums[i + 1] < nums[i];
-    }
-    if (min(numIncreasing, numDecreasing) > 1) {
-        return false;
-    }
-}
-
 inline bool isSafeRemovingOne(list<int>& ll) {
     if (isSafe(ll.begin(), ll.end())) {
         return true;
